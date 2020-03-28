@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Lemonade</string>
+    <string name="db_name">messagesDB</string>
+</resources>
