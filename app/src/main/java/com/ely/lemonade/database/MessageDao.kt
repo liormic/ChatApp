@@ -7,7 +7,6 @@ import com.ely.lemonade.database.Message
 
 @Dao
 interface MessageDao {
-
     @Query("SELECT * FROM messages")
     fun getAllMessagesPaged(): DataSource.Factory<Int, Message>
 
