@@ -1,6 +1,7 @@
-package com.ely.lemonade
+package com.ely.lemonade.chatscreen
 
 import androidx.lifecycle.MutableLiveData
+import com.ely.lemonade.database.Message
 import com.ely.lemonadeserver.LemonadeServer
 import com.google.gson.Gson
 

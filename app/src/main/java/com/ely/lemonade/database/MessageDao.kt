@@ -1,25 +1,16 @@
-package com.ely.lemonade
+package com.ely.lemonade.database
 
 import androidx.lifecycle.LiveData
 import androidx.paging.DataSource
 import androidx.room.*
+import com.ely.lemonade.database.Message
 
 @Dao
 interface MessageDao {
 
     @Query("SELECT * FROM messages")
-    fun getAll(): LiveData<List<Message>>
-
-    @Query("SELECT * FROM messages")
     fun getAllMessagesPaged(): DataSource.Factory<Int, Message>
-
-    @Insert
-    fun insertAll(messages: List<Message>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertMessage(message: Message)
-
-    @Delete
-    fun delete(message: Message)
-
 }

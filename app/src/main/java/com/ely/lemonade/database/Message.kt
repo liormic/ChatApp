@@ -1,4 +1,4 @@
-package com.ely.lemonade
+package com.ely.lemonade.database
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

@@ -1,9 +1,10 @@
-package com.ely.lemonade
+package com.ely.lemonade.database
 
 import android.content.Context
-import androidx.room.Room
 import androidx.room.Database
+import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.ely.lemonade.R
 
 
 @Database(entities = [Message::class], version = 1, exportSchema = false)
@@ -16,12 +17,16 @@ abstract class LeomandeAppDb : RoomDatabase() {
         fun getInstance(context: Context): LeomandeAppDb {
             return instance ?: synchronized(this) {
                 instance
-                    ?: buildDatabase(context).also { instance = it }
+                    ?: buildDatabase(
+                        context
+                    ).also { instance = it }
             }
         }
 
         private fun buildDatabase(context: Context): LeomandeAppDb {
-            return Room.databaseBuilder(context, LeomandeAppDb::class.java, context.getString(R.string.db_name)).build()
+            return Room.databaseBuilder(context, LeomandeAppDb::class.java, context.getString(
+                R.string.db_name
+            )).build()
         }
     }
 }

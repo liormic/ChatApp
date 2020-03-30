@@ -1,4 +1,4 @@
-package com.ely.lemonade
+package com.ely.lemonade.chatscreen
 
 import android.view.View
 import com.ely.lemonadeserver.MessageTypes
@@ -13,24 +13,23 @@ class LayoutParams() {
 
     fun setParamByStep(step: String) {
         when (step) {
-
             Step.STEP2_2.name -> onlyDigits = true
             Step.STEP3.name, Step.STEP5.name -> {
                 chatBoxVisiblity = View.GONE
                 buttonsContainerVisiblty = View.VISIBLE
-                if(step == Step.STEP5.name){
+                if (step == Step.STEP5.name) {
                     leftButtonText = MessageTypes.RESTART.toString()
-                    rightButtonText= MessageTypes.EXIT.toString()
-                }  else {
-                     leftButtonText = MessageTypes.NO.toString()
-                     rightButtonText = MessageTypes.YES.toString()
+                    rightButtonText = MessageTypes.EXIT.toString()
+                } else {
+                    leftButtonText = MessageTypes.NO.toString()
+                    rightButtonText = MessageTypes.YES.toString()
                 }
-            } else -> {
+            }
+            else -> {
                 onlyDigits = false
-                chatBoxVisiblity =  View.VISIBLE
+                chatBoxVisiblity = View.VISIBLE
                 buttonsContainerVisiblty = View.GONE
             }
-
         }
     }
 }

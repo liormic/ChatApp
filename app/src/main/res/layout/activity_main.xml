@@ -30,8 +30,7 @@
                         android:layout_width="@dimen/circle_size"
                         android:layout_height="@dimen/circle_size"
                         android:cropToPadding="true"
-                        android:src="@drawable/avatar"
-                        />
+                        android:src="@drawable/avatar" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -160,6 +159,7 @@
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_below="@id/appbar"
             android:layout_above="@+id/typingAnimation"
             android:layout_marginBottom="@dimen/recycler_margin_bottom"
             android:layoutAnimation="@anim/recycler_animation"

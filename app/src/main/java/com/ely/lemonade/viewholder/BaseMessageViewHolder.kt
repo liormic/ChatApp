@@ -1,4 +1,4 @@
-package com.ely.lemonade
+package com.ely.lemonade.viewholder
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView

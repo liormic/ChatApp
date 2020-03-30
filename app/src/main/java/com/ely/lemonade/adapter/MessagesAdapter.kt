@@ -1,12 +1,17 @@
-package com.ely.lemonade
+package com.ely.lemonade.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.paging.PagedListAdapter
-import com.ely.lemonade.Message.Companion.TYPE_BOT_MESSAGE
-import com.ely.lemonade.Message.Companion.TYPE_SEPERATOR
-import com.ely.lemonade.Message.Companion.TYPE_USER_MESSAGE
+import com.ely.lemonade.R
+import com.ely.lemonade.database.Message
+import com.ely.lemonade.database.Message.Companion.TYPE_BOT_MESSAGE
+import com.ely.lemonade.database.Message.Companion.TYPE_SEPERATOR
+import com.ely.lemonade.database.Message.Companion.TYPE_USER_MESSAGE
+import com.ely.lemonade.database.MessageDiff
+import com.ely.lemonade.viewholder.BaseMessageViewHolder
+import com.ely.lemonade.viewholder.BotMessageViewHolder
+import com.ely.lemonade.viewholder.UserMessageViewHolder
 
 class MessagesAdapter : PagedListAdapter<Message, BaseMessageViewHolder<*>>(MessageDiff()) {
 
