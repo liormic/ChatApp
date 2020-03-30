@@ -4,7 +4,7 @@ import android.view.View
 import android.widget.TextView
 
 
-class BotMessageViewHolder(val view: View) : BaseMessageViewHolder<Message>(view) {
+class BotMessageViewHolder(view: View) : BaseMessageViewHolder<Message>(view) {
     private val messageContent = view.findViewById<TextView>(R.id.message)
 
     override fun bind(item: Message) {

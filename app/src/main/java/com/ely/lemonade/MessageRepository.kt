@@ -20,8 +20,13 @@ class MessageRepository : CoroutineScope {
     init {
         val factory: DataSource.Factory<Int, Message> =
             messagesDao.getAllMessagesPaged()
+        val config = PagedList.Config.Builder()
+            .setEnablePlaceholders(true)
+            .setPageSize(Constants.DB_PAGE_SIZE)
+            .setPrefetchDistance(Constants.DB_PREFETCH_SIZE)
+            .build()
         val pagedListBuilder: LivePagedListBuilder<Int, Message> = LivePagedListBuilder<Int, Message>(factory,
-            Constants.DB_PAGE_SIZE)
+            config)
         messagesLiveData = pagedListBuilder.build()
     }
 

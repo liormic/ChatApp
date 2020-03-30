@@ -3,69 +3,169 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:orientation="vertical"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/chat_background"
+        android:orientation="vertical">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_scrollFlags="scroll|enterAlways">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/botAvatar"
+                        android:layout_width="@dimen/circle_size"
+                        android:layout_height="@dimen/circle_size"
+                        android:cropToPadding="true"
+                        android:src="@drawable/avatar"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/defined_margin"
+                        android:layout_toEndOf="@id/botAvatar"
+                        android:layout_toRightOf="@id/botAvatar"
+                        android:text="@string/bot_name"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/text_size"
+                        android:layout_marginLeft="@dimen/defined_margin" />
+
+                </RelativeLayout>
+            </androidx.appcompat.widget.Toolbar>
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <com.github.ybq.android.spinkit.SpinKitView
+            android:id="@+id/progressBar"
+            style="@style/SpinKitView.Large.Pulse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:SpinKit_Color="@color/colorPrimary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <include
+            android:id="@+id/typingAnimation"
+            layout="@layout/bot_typing_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/textBoxContainer"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="15dp"
+            android:visibility="gone" />
 
         <RelativeLayout
             android:id="@+id/textBoxContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="@dimen/defined_margin"
+            android:layout_marginEnd="@dimen/defined_margin"
+            android:layout_marginBottom="@dimen/defined_margin"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/recyclerView">
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/darker_gray"
-                />
 
-            <EditText
-                android:id="@+id/editText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_toStartOf="@+id/sendButton"
-                android:layout_toLeftOf="@+id/sendButton"
-                android:background="@android:color/transparent"
-                android:hint="Taper votre message"
-                android:padding="16dp"
-                android:textSize="16dp" />
-
-            <ImageButton
-                android:id="@+id/sendButton"
+            <RelativeLayout
+                android:id="@+id/chatBoxContainer"
                 android:layout_width="wrap_content"
-                android:animateLayoutChanges="true"
-                android:visibility="gone"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:layout_alignParentEnd="true"
-                android:src="@drawable/ic_send_black_24dp" />
+                android:layout_marginBottom="4dp"
+                android:background="@drawable/chat_box_bg"
+                android:elevation="2dp">
+
+                <EditText
+                    android:id="@+id/messageEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@+id/sendButton"
+                    android:background="@android:color/transparent"
+                    android:digits="aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyY zZ0123456789"
+                    android:hint="@string/start_writing"
+                    android:inputType="textPersonName"
+                    android:padding="@dimen/defined_margin"
+                    android:textColorHighlight="#FFB1B1C0"
+                    android:textCursorDrawable="@drawable/cursor_color"
+                    android:textSize="@dimen/text_size" />
+
+                <ImageButton
+                    android:id="@+id/sendButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginEnd="@dimen/defined_margin"
+                    android:layout_marginRight="@dimen/defined_margin"
+                    android:background="@drawable/ic_send_arrow_gray" />
+            </RelativeLayout>
 
 
+            <LinearLayout
+                android:id="@+id/buttonsContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                android:weightSum="2">
+
+                <Button
+                    android:id="@+id/leftButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="4dp"
+                    android:layout_marginRight="4dp"
+                    android:layout_weight="1"
+                    android:background="@color/user_color"
+                    android:padding="6dp"
+                    android:text="text"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/text_size" />
+
+                <Button
+                    android:id="@+id/rightButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@color/user_color"
+                    android:padding="6dp"
+                    android:text="text"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/text_size" />
+            </LinearLayout>
         </RelativeLayout>
-<!--        <Button-->
-<!--            android:id="@+id/button"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginEnd="16dp"-->
-<!--            android:background="@drawable/ic_send_black_24dp"-->
-<!--            android:textColor="@android:color/white"-->
-<!--            app:layout_constraintBottom_toBottomOf="@+id/editText"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="@+id/editText" />-->
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
-            android:layout_width="0dp"
-            tools:listitem="@layout/user_message_item"
-            tools:itemCount="5"
-            android:layout_height="0dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/typingAnimation"
+            android:layout_marginBottom="@dimen/recycler_margin_bottom"
+            android:layoutAnimation="@anim/recycler_animation"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toTopOf="@+id/textBoxContainer"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            tools:itemCount="5"
+            tools:listitem="@layout/user_message_item" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </RelativeLayout>
 </layout>

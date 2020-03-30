@@ -9,20 +9,21 @@
     android:layout_marginBottom="15dp"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/message"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/typingAnimation"
+        android:layout_width="@dimen/circle_size"
+        android:layout_height="@dimen/circle_size"
         android:layout_marginStart="@dimen/defined_margin"
         android:layout_marginLeft="@dimen/defined_margin"
         android:background="@drawable/bot_bubble_chat"
         android:padding="16dp"
-        android:textColor="@android:color/black"
-        android:textSize="@dimen/text_size"
         app:layout_constrainedWidth="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/botAvatar"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="typing.json"
+        app:lottie_loop="true" />
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/botAvatar"
@@ -32,15 +33,4 @@
         android:src="@drawable/avatar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
-
-    <View
-        android:id="@+id/seperatorLine"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="4dp"
-        android:background="@android:color/darker_gray"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/message" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
